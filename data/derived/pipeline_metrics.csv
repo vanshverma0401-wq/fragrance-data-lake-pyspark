@@ -1,0 +1,13 @@
+metric,value
+amazon_metadata_raw_rows,1028914
+amazon_fragrance_products_after_filter,57428
+amazon_review_rows_parsed,23911390
+amazon_fragrance_review_rows_after_join,1248393
+fragrantica_cleaned_rows,24063
+fragrantica_perfumes_rows,70103
+parfumo_cleaned_rows,30046
+brand_quality_rows,420
+recent_accord_shift_rows,10
+accord_trend_rows,120
+top_perfume_rows,15
+high_rated_note_lift_rows,127
