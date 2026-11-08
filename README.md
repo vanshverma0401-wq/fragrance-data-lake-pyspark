@@ -1,4 +1,4 @@
-# Fragrance Data Lake: AWS and PySpark Portfolio Case Study
+# Fragrance Data Lake: AWS and PySpark ETL
 
 An individual data-engineering case study that uses Amazon S3 and Apache Spark
 to turn large, heterogeneous fragrance datasets into curated tables and
@@ -10,19 +10,29 @@ inner-joined table of **1,248,393 fragrance-review rows**. A separate
 Parfumo-derived branch cleaned **30,046 fragrance records** and powered the
 aggregate brand, accord, trend, and note analyses shown below.
 
-> This repository candidate is a sanitized public reconstruction. It contains
+[Pipeline source](src/spark_pipeline.py) · [Aggregate results](data/derived/) · [Methods and limitations](METHODS_AND_LIMITATIONS.md)
+
+![Fragrance brand analysis from the Parfumo-derived branch: weighted rating and rating support](assets/brand_rating_support.png)
+
+*Preview: a rebuilt chart from saved Parfumo-derived aggregate results. The Amazon review pipeline is a separate branch; the chart does not summarize the 23.9 million Amazon reviews.*
+
+> This repository is a sanitized public reconstruction. It contains
 > original code, aggregate result tables, and rebuilt charts—not raw data,
 > credentials, cloud identifiers, execution logs, course materials, or the
 > private submission.
 
-## What this project demonstrates
+<a id="what-this-project-demonstrates"></a>
 
-- AWS S3 data-lake organization and EMR-oriented Spark processing
-- PySpark ingestion of JSON Lines and CSV sources
-- Schema cleanup, text-based JSON parsing, filtering, deduplication, and joins
-- Parquet curation and Spark aggregations
-- Explicit data-quality checks and saved row-count reconciliation
-- Recruiter-facing visual communication with careful limits on interpretation
+## Skills demonstrated
+
+| Skill | Evidence in this project |
+| --- | --- |
+| **Data engineering and ETL** | [PySpark pipeline](src/spark_pipeline.py) ingests JSON Lines/CSV, cleans schemas and text fields, filters records, deduplicates product keys and joins reviews to products. |
+| **Python, Apache Spark and PySpark DataFrames** | DataFrame transformations, aggregations, term expansion and explicit numeric casting in the [pipeline source](src/spark_pipeline.py). |
+| **AWS S3 and Parquet data lakes** | Runtime-supplied S3 or local paths, curated Parquet tables and separate analytics outputs; the workflow is EMR-oriented without publishing cloud identifiers. |
+| **Spark execution configuration** | Broadcast review-to-product join, adaptive query execution and configurable shuffle partitions in [source](src/spark_pipeline.py); no benchmarked speedup is claimed. |
+| **Data quality and reconciliation** | Required-column/range checks plus saved [row-count metrics](data/derived/pipeline_metrics.csv) and [result-contract tests](tests/test_derived_results.py). |
+| **Data visualization and analytical communication** | [Matplotlib/Pandas renderer](src/create_visuals.py) turns compact aggregate tables into four descriptive charts with explicit denominators and support thresholds. |
 
 ## Pipeline
 
@@ -61,9 +71,7 @@ full 23.9-million-row run is not reproduced by this repository alone.
 
 ### Strong brands combined high weighted ratings with broad support
 
-![Top brands by weighted rating and rating support](assets/brand_rating_support.png)
-
-The chart shows the ten brands selected by the private composite score
+The opening preview shows this result. The chart shows the ten brands selected by the private composite score
 `weighted_rating * log10(total_rating_count)`. The x-axis remains on the full
 0–10 rating scale, and support counts are shown separately to avoid equating a
 small rating difference with a large practical effect.
