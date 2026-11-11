@@ -114,6 +114,15 @@ METHODS_AND_LIMITATIONS.md
 
 ## Reproduce the included visuals
 
+For a small run that needs no upstream dataset, start with the
+[synthetic ingestion and recovery exercise](examples/synthetic/README.md).
+It is a separately labeled November 2026 extension using Python and SQLite,
+not a replay of the historical Spark/cloud execution. It demonstrates exact
+record accounting, quarantine, identical-input replay and transaction rollback.
+
+See [environment and verification scope](ENVIRONMENT.md) for tested versions
+and the distinction between the small tests, chart regeneration and Spark.
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate

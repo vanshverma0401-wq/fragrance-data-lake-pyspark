@@ -1,0 +1,4 @@
+# Small fixture and saved-result checks only; excludes Spark and plotting.
+numpy==2.3.5
+pandas==2.2.3
+pytest==8.4.1

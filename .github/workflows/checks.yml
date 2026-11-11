@@ -1,0 +1,16 @@
+name: Public package and synthetic reliability
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements-test.txt
+      - run: python -m pytest -q
+        env:
+          PYTHONDONTWRITEBYTECODE: '1'

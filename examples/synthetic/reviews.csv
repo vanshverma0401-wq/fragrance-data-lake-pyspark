@@ -1,0 +1,8 @@
+review_id,product_id,rating
+R1,P100,5
+R2,P100,4
+R3,P200,3
+R3,P200,3
+R4,UNKNOWN,2
+R5,P100,7
+R6,,2
